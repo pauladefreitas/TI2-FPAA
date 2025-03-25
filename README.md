@@ -272,3 +272,5 @@ O que significa que o algoritmo cresce linearmente com o tamanho da entrada _n_.
 ### Diagrama visual
 
 ![Árvore recursiva](assets/recursiveTree.png)
+
+obs: para visualizar as observações escritas no diagrama, o GitHub deve estar no modo claro.
