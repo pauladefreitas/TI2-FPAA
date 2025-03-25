@@ -271,4 +271,4 @@ O que significa que o algoritmo cresce linearmente com o tamanho da entrada _n_.
 
 ### Diagrama visual
 
-![Árvore recursiva](diagrams/recursiveTree.png)
+![Árvore recursiva](assets/recursiveTree.png)
