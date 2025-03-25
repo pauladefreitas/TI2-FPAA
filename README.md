@@ -18,16 +18,16 @@ A partir disso, há uma verificação de tamanho da lista. Caso o tamanho da lis
         return result
 ```
 
-Logo após,karatsuba há outra verificação de tamanho da lista. Dessa vez, se o tamanho for 2, os valores são diretamente comparados para identificar um mínimo e um máximo.
+Logo após, há outra verificação de tamanho da lista. Dessa vez, se o tamanho for 2, os valores são diretamente comparados para identificar um mínimo e um máximo.
 
 ```python
     if len(lista) == 2:
-        if lista[0] > lista[1]: #comparação
-            max_d = lista[0]    #atribuição de valor
-            min_d = lista[1]
+        if lista[0] > lista[1]:
+            result = [lista[1], lista[0]]
+            return result
         else:
-            max_d = lista[1]
-            min_d = lista[0]
+            result = [lista[0], lista[1]]
+            return result
 ```
 
 A próxima etapa divide a lista em duas sublistas para realizar a estratégia de divisão e conquista.
@@ -88,4 +88,132 @@ Finalmente, como boa prática, é criada a variável _result_ que contém um _ar
 
 ## Relatório técnico
 
-### Análise da Complexidade Assintótica
+### Análise da complexidade assintótica pela contagem de operações
+
+A análise de complexidade assintótica pela contagem de operações é uma forma de estimar o crescimento do tempo de execução de um algoritmo com base no número de operações executadas.
+
+O algoritmo se inicia verificando se o tamanho da lista é maior que 1, se for o caso, não há comparações.
+
+```python
+    if len(lista) == 1:
+        result = [lista[0], lista[0]] #+0
+        return result
+```
+
+Posteriormente, há outra verificação do tamanho da lista, dessa vez por 2, se for o caso, ocorre a primeira comparação do maior e menor valor entre os dois.
+
+```python
+    if len(lista) == 2:
+        if lista[0] > lista[1]: #+1
+            result = [lista[1], lista[0]]
+            return result
+        else:
+            result = [lista[0], lista[1]]
+            return result
+```
+
+Agora, há um processo de divisão em um subproblema. A lista maior é divida em duas listas menores, a fim de diminuir a complexidade do algoritmo pela metade.
+
+```python
+    meio = len(lista)//2
+    esquerda = lista[:meio] #n/2
+    direita = lista[meio:]  #n/2
+```
+
+Por fim, temos as duas últimas comparações, que comparam os valores das listas restantes para achar os valores mínimos e máximos de cada uma.
+
+```python
+    min_total = min(min_esq, min_dir) #+1
+    max_total = max(max_esq, max_dir) #+1
+```
+
+Com isso, a análise para C(n) sendo C = contagem de comparações e n = número de elementos.
+
+$$
+C(1) = 0
+C(2) = 1
+C(n) = 2C(n/2) + 2
+$$
+
+Resolvendo a recorrência:
+
+$$
+C(n) = 2C(n/2) + 2
+C(n) = 2(2C(n/4) + 2) + 2
+C(n) = 4C(n/4) + 4 + 2
+C(n) = 4C(n/4) + 6
+
+C(n) = 4(2C(n/2 + 2)) + 6
+C(n) = 8C(n/8) + 8 + 6
+C(n) = 8C(n/8) + 14
+$$
+
+A partir disso, vemos o padrão:
+
+$$
+C(n) = 2^kC(n/2^k) + 2K
+$$
+
+Para encontrar o valor de K, recorremos ao caso base onde a recursão para quando chega-se ao caso base C(2) = 1:
+
+$$
+n/2^k = 2
+n = 2^k+1
+k = log2n - 1
+$$
+
+Na fórmula:
+
+$$
+C(n) = 2^log2n-2 * 1 + 2(log2n-1)
+C(n) = n/2 + 2log2n-2
+C(n) ~ 3n/2 - 2
+$$
+
+Como, nesta operação, ignora-se as constantes, dá-se que a complexidade temporal é O(n).
+
+### Análise da complexidade assintótica pela aplicação do Teorema Mestre
+
+Dado que a recorrência do algoritmo MaxMin Select é:
+
+$$
+T(n) = 2T (n/2) + O(1)
+$$
+
+1. Os valores de _a_, _b_ e _f(n)_ na fórmula são:
+
+_a_ = 2
+_b_ = 2
+_f(n)_ = O(1)
+
+2. Cálculo para determinar o valor de _p_:
+
+$$
+p = logb a
+p = log2 2
+p = 1
+$$
+
+3. Em qual dos três casos do Teorema Mestre essa recorrência se enquadra:
+
+MaxMin Select se enquandra no Caso 1, onde o custo da recursão domina, porque a maior parte do trabalho está na resolução dos subproblemas. Um exemplo é quando o custo externo é muito pequeno.
+
+Visto que p = 1, e como:
+
+$$
+f(n) = O(n^1-E) = O(n^0)
+Solução = T(n) = Θ(n)
+$$
+
+4. Solução assintótica:
+
+$$
+f(n) = O(1), e n^p = n
+T(n) = Θ(n)
+$$
+
+O que significa que o algoritmo cresce linearmente com o tamanho da entrada _n_.
+
+### Diagrama visual
+
+![Árvore recursiva](diagrams/recursiveTree.png)

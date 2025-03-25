@@ -5,11 +5,11 @@ def maxmin(lista):
 
     if len(lista) == 2:
         if lista[0] > lista[1]:
-            max_d = lista[0]
-            min_d = lista[1]
+            result = [lista[1], lista[0]]
+            return result
         else:
-            max_d = lista[1]
-            min_d = lista[0]
+            result = [lista[0], lista[1]]
+            return result
 
     meio = len(lista)//2
     esquerda = lista[:meio]
