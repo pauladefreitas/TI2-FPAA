@@ -216,9 +216,10 @@ T(n) = 2T (n/2) + O(1)
 $$
 
 1. Os valores de _a_, _b_ e _f(n)_ na fórmula são:
-   $$
-   a = 2
-   $$
+
+$$
+a = 2
+$$
 
 $$
 b = 2
