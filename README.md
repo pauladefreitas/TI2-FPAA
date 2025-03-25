@@ -216,16 +216,29 @@ T(n) = 2T (n/2) + O(1)
 $$
 
 1. Os valores de _a_, _b_ e _f(n)_ na fórmula são:
+   $$
+   a = 2
+   $$
 
-_a_ = 2
-_b_ = 2
-_f(n)_ = O(1)
+$$
+b = 2
+$$
+
+$$
+f(n) = O(1)
+$$
 
 2. Cálculo para determinar o valor de _p_:
 
 $$
-p = logb a
+p = \log_b a
+$$
+
+$$
 p = \log_2 2
+$$
+
+$$
 p = 1
 $$
 
@@ -237,13 +250,19 @@ Visto que p = 1, e como:
 
 $$
 f(n) = O(n^1-E) = O(n^0)
-Solução = T(n) = Θ(n)
+$$
+
+$$
+S = T(n) = Θ(n)
 $$
 
 4. Solução assintótica:
 
 $$
 f(n) = O(1), e n^p = n
+$$
+
+$$
 T(n) = Θ(n)
 $$
 
