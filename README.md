@@ -127,11 +127,17 @@ Por fim, temos as duas últimas comparações, que comparam os valores das lista
     max_total = max(max_esq, max_dir) #+1
 ```
 
-Com isso, a análise para C(n) sendo C = contagem de comparações e n = número de elementos.
+Com isso, a análise para \(C(n)\) sendo \(C\) = contagem de comparações e \(n\) = número de elementos.
 
 $$
 C(1) = 0
+$$
+
+$$
 C(2) = 1
+$$
+
+$$
 C(n) = 2C(n/2) + 2
 $$
 
@@ -139,38 +145,67 @@ Resolvendo a recorrência:
 
 $$
 C(n) = 2C(n/2) + 2
-C(n) = 2(2C(n/4) + 2) + 2
-C(n) = 4C(n/4) + 4 + 2
-C(n) = 4C(n/4) + 6
+$$
 
-C(n) = 4(2C(n/2 + 2)) + 6
+$$
+C(n) = 2(2C(n/4) + 2) + 2
+$$
+
+$$
+C(n) = 4C(n/4) + 4 + 2
+$$
+
+$$
+C(n) = 4C(n/4) + 6
+$$
+
+$$
+C(n) = 4(2C(n/2) + 2) + 6
+$$
+
+$$
 C(n) = 8C(n/8) + 8 + 6
+$$
+
+$$
 C(n) = 8C(n/8) + 14
 $$
 
 A partir disso, vemos o padrão:
 
 $$
-C(n) = 2^kC(n/2^k) + 2K
+C(n) = 2^kC(n/2^k) + 2k
 $$
 
-Para encontrar o valor de K, recorremos ao caso base onde a recursão para quando chega-se ao caso base C(2) = 1:
+Para encontrar o valor de \( k \), recorremos ao caso base onde a recursão para quando chega-se ao caso base \( C(2) = 1 \):
 
 $$
-n/2^k = 2
-n = 2^k+1
-k = log2n - 1
+\frac{n}{2^k} = 2
+$$
+
+$$
+n = 2^{k+1}
+$$
+
+$$
+k = \log_2 n - 1
 $$
 
 Na fórmula:
 
 $$
-C(n) = 2^log2n-2 * 1 + 2(log2n-1)
-C(n) = n/2 + 2log2n-2
-C(n) ~ 3n/2 - 2
+C(n) = 2^{\log_2 n} - 2 \cdot 1 + 2(\log_2 n - 1)
 $$
 
-Como, nesta operação, ignora-se as constantes, dá-se que a complexidade temporal é O(n).
+$$
+C(n) = \frac{n}{2} + 2\log_2 n - 2
+$$
+
+$$
+C(n) \sim \frac{3n}{2} - 2
+$$
+
+Como, nesta operação, ignora-se as constantes, dá-se que a complexidade temporal é \(O(n)\).
 
 ### Análise da complexidade assintótica pela aplicação do Teorema Mestre
 
@@ -190,7 +225,7 @@ _f(n)_ = O(1)
 
 $$
 p = logb a
-p = log2 2
+p = \log_2 2
 p = 1
 $$
 
